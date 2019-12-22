@@ -1,0 +1,58 @@
+<div class="container">
+<div class="card" id="form-body">
+  <div class="card-header">
+    <h3 class="card-title">
+      Upload an image
+    </h3>
+  </div>
+  <div class="card-body form-group">
+    <form method="POST" action="/images">
+        <div class="row">
+          <div class="col-md-2">
+            <span class="card-text">Upload:</span>
+          </div>
+          <div class="custom-file mb-3 col-md-10">
+            <label class="custom-file-label" for="file">Choose file:</label>
+            <input type="file" name="file" id="file" class="custom-file-input">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 card-text" for="title">Title:</label>
+          <input type="text" name="title" id="title" class="form-control col-md-10">
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 card-text" for="description">Description:</label>
+          <textarea rows="2" name="description" id="description" class="form-control col-md-10"></textarea>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-12 text-right">
+            <button type="submit" id="login-btn" class="btn btn-success" type="button">
+              <i class="fa fa-cloud-upload" aria-hidden="true"> Upload Image</i>
+            </button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      Newest Images
+    </h3>
+  </div>
+  <div class="card-body">
+    {{#each images}}
+      <div class="col-md-4 text-center" style="padding-bottom: 1em;">
+        <a href="/images/{{uniqueId}}">
+          <img src="/public/upload/{{filename}}" alt="{{title}}" style="width: 175px; height: 175px;"
+          class="img-thumbnail">
+        </a>
+      </div>
+    {{/each}}
+  </div>
+</div>

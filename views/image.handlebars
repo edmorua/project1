@@ -1,0 +1,96 @@
+<div class="card card-primary">
+  <div class="card-header">
+    <h2 class="card-title">{{image.title}}</h2>
+  </div>
+  <div class="card-body row">
+    <div class="col-md-12 text-center">
+      <img src="/public/upload/{{image.filename}}" alt="" class="img-tumbnail">
+    </div>
+    <p class="card-text col-md-12">{{image.description}}</p>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-8">
+        <button class="btn btn-success" id="btn-like" data-id="{{image.uniqueId}}">
+          <i class="fa fa-heart" aria-hidden="true"> Like</i>
+        </button>
+        <strong class="likes-count">{{image.likes}}</strong> &nbsp; - &nbsp; <i class="fa fa-eye" aria-hidden="true"></i>
+        <strong>{{image.views}}</strong> &nbsp; - &nbsp; Posted: <em class="text-muted">
+          {{timeago image.timestamp}}
+          </em>
+      </div>
+
+      <div class="col-md-4 text-right">
+        <button class="btn btn-danger" id="btn-delete" data-id="{{image.uniqueId}}">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Comments</strong>
+      </div>
+      <div class="col-md-4 text-right">
+        <button class="btn btn-primary btn-sm" id="btn-comment" data-id="{{image.uniqueId}}">
+          <i class="fa fa-comments-o" aria-hidden="true">Post Comment...</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <blockquote id="post-comment" 
+    style="background: #f9f9f9;
+    border-left: 8px solid #ccc;margin: 1.5em 10px;padding: 0.5em 10px;">
+    
+        <form method="POST" action="/images/{{image.uniqueId}}/comment">
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" name="name" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+              <input type="text" name="email" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="comment" class="col-sm-2 control-label">Comment:</label>
+            <div class="col-sm-10">
+              <textarea rows="2" name="comment" class="form-control"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12 text-right">
+              <button type="submit" id="comment-btn" class="btn btn-primary" type="button">
+                <i class="fa fa-comment" aria-hidden="true"></i>Post
+              </button>
+            </div>
+          </div>
+        </form>
+    </blockquote>
+
+    <ul class="media-list">
+      {{#each comments}}
+      <li class="media">
+        <a href="#" class="pull-left">
+          <img class="media-object img-circle"  src="http://www.gravatar.com/avatar/{{gravatar}}?d=monsterid&s=45">
+        </a>
+        <div class="media-body">
+          {{comment}}
+          <br/><strong class="media-header">{{name}}</strong> <small class="text-muted">{{timeago timestamp}}</small>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
